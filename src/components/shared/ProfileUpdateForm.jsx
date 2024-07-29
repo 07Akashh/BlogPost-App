@@ -5,7 +5,7 @@ import SelectInput from "./SelectInput";
 import Textarea from "./TextArea";
 
 export const ProfileUpdateForm = ({ formData, handleChange, handleSubmit, uploading, handleImageClick, fileInputRef }) => (
-    <form onSubmit={handleSubmit} className="flex  justify-center border border-black flex-col">
+    <form onSubmit={handleSubmit} className="flex  justify-center  flex-col">
         <ProfileImage
             previewImage={formData.profile_image}
             onClick={handleImageClick}
@@ -46,7 +46,7 @@ export const ProfileUpdateForm = ({ formData, handleChange, handleSubmit, upload
             options={['Male', 'Female', 'Custom']}
         />
         <button type="submit" disabled={uploading} className="bg-blue-500 text-white py-2 px-4 rounded-md">
-            Update Profile
+        {uploading ? 'Updating...' : 'Update Profile'}
         </button>
     </form>
 );

@@ -6,10 +6,9 @@ const SelectInput = ({ name, value, handleChange, options }) => (
         value={value}
         onChange={handleChange}
         required
-        className=' bg-slate-100 border-none my-[8px] mx-auto py-[10px] px-[15px] rounded-md text-[13px] w-[220px] sm:w-[100%] outline-transparent mb-5'
-        defaultValue={''}
+        className=' bg-white border-none my-[8px] mx-auto py-[10px] px-[15px] rounded-md text-[13px] w-[220px] sm:w-[100%] outline-transparent mb-5'
     >
-        <option value="" disabled  >Select Gender</option>
+        <option value="" disabled selected={true} >Select Gender</option>
         {options.map(option => (
             <option key={option} value={option}>{option}</option>
         ))}

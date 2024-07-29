@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PostsList from '../PostsList';
 
 const BlogPostModal = (  ) => {
@@ -11,6 +11,11 @@ const BlogPostModal = (  ) => {
     const closeModal = () => {
         setSelectedPostUrl(null);
     };
+
+        useEffect(() => {
+            document.title = 'BlogPost';
+        }, []);
+
 
     return (
         <div>

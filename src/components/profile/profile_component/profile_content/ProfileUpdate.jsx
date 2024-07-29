@@ -27,7 +27,6 @@ const ProfileUpdate = ({ user, onProfileUpdate, closeButton }) => {
         setUploading(true);
         try {
             await UserService.updateProfile(createFormData(formData));
-            toast.success('Profile updated successfully!');
             onProfileUpdate?.();
             closeButton?.();
         } catch (error) {
@@ -55,7 +54,6 @@ const ProfileUpdate = ({ user, onProfileUpdate, closeButton }) => {
                     handleImageClick={handleImageClick}
                     fileInputRef={fileInputRef}
                 />
-                {uploading && <p>Uploading...</p>}
             </div>
         </>
     );

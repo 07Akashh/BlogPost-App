@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useUsers from '../hooks/useUsers';
 import UserItem from './user_list/UserItem';
 
@@ -9,6 +9,10 @@ const UserList = () => {
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
     };
+    
+    useEffect(() => {
+        document.title = 'BlogPost';
+    }, []);
 
     const filteredUsers = users.filter(user =>
         user.username && user.username.toLowerCase().includes(searchTerm.toLowerCase())

@@ -12,7 +12,7 @@ const Sidebar = ({ activeSection, setActiveSection, onAddPost }) => {
     return (
         <>
             <div className="p-4 md:w-60 lg:w-72 h-screen bg-fixed bg-gray-200 sticky shadow-lg border hidden md:block z-50">
-                <h2 className="text-xl font-bold mb-4 ">User BlogSpot</h2>
+                <h2 className="text-xl font-bold mb-4 ">User BlogPost</h2>
                 <ul>
                     {sections.map((section) => (
                         <li

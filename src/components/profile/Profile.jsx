@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useProfile from '../hooks/useProfile';
 import usePosts from '../hooks/usePosts';
 import ProfileContent from './profile_component/ProfileContent';
@@ -8,6 +8,14 @@ const Profile = ({ handleProfileUpdate, user, handleClose }) => {
     const { posts, error: postsError, handleUpdatePosts, handleDelete } = usePosts(user._id);
 
     const error = profileError || postsError;
+
+    useEffect(() => {
+        if (user && user.name) {
+            document.title = `${user.name}'s Profile`;
+        } else {
+            document.title = 'Profile';
+        }
+    }, [user]);
 
     return (
         <div className=''>

@@ -24,7 +24,7 @@ const Register = () => {
             <div className='mx-auto flex flex-col min-h-screen items-center justify-center'>
                 <div className='w-[300px] sm:w-[350px] lg:w-[370px] bg-white shadow-2xl'>
                     <div className="mt-10">
-                        <form onSubmit={handleSubmit} className='flex flex-col px-[40px]'>
+                        <form onSubmit={handleSubmit} className='flex mb-5 flex-col px-[40px]'>
                             <h1 className='text-lg font-semibold text-center'>Create Account</h1>
                             <span className='text-center mb-4'>or use your email for registration</span>
 
