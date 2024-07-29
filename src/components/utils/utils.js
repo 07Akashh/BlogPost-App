@@ -26,10 +26,13 @@ export const getTimeSinceCreation = (createdAt) => {
 
 export const getInitials = (name) => {
     if (!name) return '';
-    const nameArray = name.split(' ');
+    const filteredName = name.replace(/[^a-zA-Z\s]/g, ' ').replace(/\s+/g, ' ').trim();
+    const nameArray = filteredName.split(' ').filter(Boolean);
+    if (nameArray.length === 0) return name.charAt(0)+name.charAt(1);
     const initials = nameArray.length > 1
         ? nameArray[0][0] + nameArray[1][0]
         : nameArray[0][0];
+        
     return initials.toUpperCase();
 };
 

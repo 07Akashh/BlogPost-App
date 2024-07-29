@@ -6,7 +6,6 @@ const Dashboard = () => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [activeSection, setActiveSection] = useState(localStorage.getItem('activeSection') || 'home');
-;
 
     useEffect(() => {
         const fetchProfile = async () => {

@@ -4,24 +4,24 @@
 @tailwind utilities;
 
 .react-tel-input .form-control {
-    @apply sm:w-full !text-base rounded-md border-none py-[10px] px-[15px] my-[8px] w-[220px] bg-slate-100;
+    @apply sm:w-full rounded-md border-none py-[10px] text-[13px] px-[15px] outline-none my-[8px] w-[220px] bg-slate-100;
 }
 
 @layer utilities {
-    /* Hide scrollbar for Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
         display: none;
     }
-   /* Hide scrollbar for IE, Edge and Firefox */
+
     .no-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-  }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 }
 
 * {
-    @apply  font-sans;
+    @apply font-sans;
 }
+
 /* 
 body {
     background-color: #c9d6ff;

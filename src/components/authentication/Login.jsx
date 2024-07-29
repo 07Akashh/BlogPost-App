@@ -5,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+    const [errors, setErrors] = useState();
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -21,9 +22,10 @@ const Login = () => {
         try {
             await authService.login(formData);
             toast.success('Login successful! Redirecting...');
-            setTimeout(() => navigate('/'), 2000);
+            setTimeout(() => navigate('/', { state: { key: Date.now() } }), 2000);
         } catch (error) {
             toast.error(`Login failed: ${error.response?.data?.message || 'An error occurred'}`);
+            setErrors(error.response?.data?.message)
             console.error(error);
         }
     };
@@ -39,6 +41,7 @@ const Login = () => {
                             <span className='text-center w-[300px] mb-4 self-center'>or use your email for registration</span>
                             <input className='bg-slate-100 border-none my-[8px] mx-0 py-[10px] px-[15px] rounded-md text-[13px] w-[220px] sm:w-[100%] outline-transparent' type="text" name="username" placeholder="Email or Username" onChange={handleChange} required />
                             <input className='bg-slate-100 border-none my-[8px] mx-0 py-[10px] px-[15px] rounded-md text-[13px] w-[220px] sm:w-[100%] outline-transparent' type="password" name="password" placeholder="Password" onChange={handleChange} required />
+                            {errors && <span className="text-red-500 text-xs">{errors}</span>}
                             <button className='sm:self-center bg-blue-500 text-white rounded-xl hover:bg-blue-600 text-[12px] w-[220px]  py-4 px-10 font-bold uppercase cursor-pointer mt-5' type="submit">Login</button>
                             <p className='sm:mt-20 mt-5 w-[100%] text-center'>Don't have an account? <a href="/register" className='underline hover:text-blue-800 text-blue-500'>Register</a></p>
                         </form>

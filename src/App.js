@@ -15,8 +15,8 @@ const App = () => {
         <AuthProvider>
             <Router>
                 <Routes>
-                    <Route path="/register" element={<PublicRoute> <Register /> </PublicRoute>} />
-                    <Route path="/login" element={<PublicRoute> <Login /> </PublicRoute>} />
+                    <Route path="/register" element={<PublicRoute> <Register key={Date.now()}/> </PublicRoute>} />
+                    <Route path="/login" element={<PublicRoute> <Login key={Date.now()} /> </PublicRoute>} />
                     <Route path="/" element={<PrivateRoute> <Dashboard /> </PrivateRoute>} />
                     <Route path="/post/:id" element={<PrivateRoute> <BlogPostDetail/> </PrivateRoute>} />
                     <Route path="/posts" element={<PrivateRoute> <BlogPage /> </PrivateRoute>} />

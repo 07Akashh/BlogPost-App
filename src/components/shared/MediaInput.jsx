@@ -1,6 +1,6 @@
 const MediaInput = ({ previewMedia, onClick, fileInputRef, handleChange }) => (
     <div
-        className="flex flex-col sm:h-72 items-center gap-2.5 cursor-pointer"
+        className="flex flex-col mx-auto sm:h-72 items-center gap-2.5 cursor-pointer"
         onClick={onClick}
     >
         {previewMedia ? (

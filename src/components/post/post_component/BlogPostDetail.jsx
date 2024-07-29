@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { getBlogPostById } from '../../../services/BlogPostService';
 import CommentPostActions from '../post_content/CommentPostAction';
 import PostContent from '../post_content/PostContent';
@@ -21,6 +23,7 @@ const BlogPostDetail = () => {
                 setPost(data);
                 setLoading(false);
             } catch (err) {
+                toast.error('Failed to fetch post.');
                 setError(err.message);
                 setLoading(false);
             }
@@ -45,17 +48,20 @@ const BlogPostDetail = () => {
     }
 
     return (
-        <div className='justify-center flex w-full'>
-            <div className="flex items-center justify-center min-h-screen bg-transparent w-full">
-                <div className="rounded-xl p-5 shadow-md w-full h-full bg-white">
-                    <PostHeader author={post?.author} createdAt={post?.createdAt} />
-                    <PostMedia postUrl={post.post_url} />
-                    <PostContent title={post.title} content={post.content} />
-                    <CommentPostActions postId={post._id} toggleComments={toggleComments} />
-                    {showComments[post._id] && <CommentSection postId={post._id} />}
+        <>
+            <ToastContainer />
+            <div className='justify-center flex w-full'>
+                <div className="flex items-center justify-center min-h-screen bg-transparent w-full">
+                    <div className="rounded-xl p-5 shadow-md w-full h-full bg-white">
+                        <PostHeader author={post?.author} createdAt={post?.createdAt} />
+                        <PostMedia postUrl={post.post_url} />
+                        <PostContent title={post.title} content={post.content} />
+                        <CommentPostActions postId={post._id} toggleComments={toggleComments} />
+                        {showComments[post._id] && <CommentSection postId={post._id} />}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

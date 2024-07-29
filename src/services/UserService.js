@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://bogspot-app.onrender.com/api/users';
+const API_URL = 'http://localhost:3002/api/users';
 
 const getProfile = async () => {
     try {

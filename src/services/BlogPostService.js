@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://bogspot-app.onrender.com/api/posts';
+const API_URL = 'http://localhost:3002/api/posts';
 
 const token = localStorage.getItem('token');
 export const addComment = async (postId, comment) => {

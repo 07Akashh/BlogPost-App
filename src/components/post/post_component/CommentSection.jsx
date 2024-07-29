@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { addComment, getComments } from '../../../services/BlogPostService';
+import { toast, ToastContainer } from 'react-toastify';
 import { CommentSection } from 'react-comments-section';
-import 'react-comments-section/dist/index.css';
 import { fetchProfileData } from '../../utils/userProfile';
+import { addComment, getComments } from '../../../services/BlogPostService';
+import 'react-comments-section/dist/index.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { getInitials } from '../../utils/utils';
 
 const CommentSectionComponent = ({ postId }) => {
     const [comments, setComments] = useState([]);
@@ -15,10 +18,10 @@ const CommentSectionComponent = ({ postId }) => {
                 const data = await fetchProfileData();
                 setProfile(data);
             } catch (error) {
+                toast.error('Failed to fetch profile data.')
                 setError('Failed to fetch profile data.');
             }
         };
-
         getProfile();
     }, []);
 
@@ -28,6 +31,7 @@ const CommentSectionComponent = ({ postId }) => {
                 const data = await getComments(postId);
                 setComments(data);
             } catch (error) {
+                toast.error('Error in fetching Comment')
                 console.error('Error fetching comments:', error);
             }
         };
@@ -46,6 +50,7 @@ const CommentSectionComponent = ({ postId }) => {
             const updatedComments = await getComments(postId);
             setComments(updatedComments);
         } catch (error) {
+            toast.error('Error in adding Comment')
             console.error('Error adding comment:', error);
         }
     };
@@ -58,12 +63,13 @@ const CommentSectionComponent = ({ postId }) => {
         comId: comment._id,
         fullName: comment.commenterName,
         text: comment.comment,
-        avatarUrl: profile.profile_image,
+        avatarUrl: comment.commenterProfile ? comment.commenterProfile : `https://ui-avatars.com/api/name=${getInitials(comment.commenterName)}&background=random`,
         replies: []
     }));
 
     return (
-        <div>
+        <>
+        <ToastContainer />
             <CommentSection
                 currentUser={{
                     currentUserId: profile.username,
@@ -77,10 +83,9 @@ const CommentSectionComponent = ({ postId }) => {
                 commentData={formattedComments}
                 onSubmitAction={({ text }) => {
                     handleCommentSubmit(text);
-                    console.log('check submit', { text });
                 }}
             />
-        </div>
+        </>
     );
 };
 

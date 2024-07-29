@@ -10,6 +10,6 @@ export const fetchProfileData = async () => {
         return profileData;
     } catch (error) {
         console.error('Error fetching profile data:', error);
-        throw error; // Re-throw the error to be handled by the caller
+        throw error;
     }
 };
