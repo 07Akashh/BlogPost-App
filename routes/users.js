@@ -32,7 +32,7 @@ router.post('/register', validationRules(), async (req, res) => {
         const payload = {
             id: user.id
         };
-        const token = jwt.sign(payload,process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign(payload,process.env.JWT_SECRET);
         res.status(201).json({ user, token });
     } catch (error) {
         console.error('Error registering user:', error);
