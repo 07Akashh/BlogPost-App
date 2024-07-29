@@ -9,11 +9,10 @@ router.post('/:id/comment', auth, async (req, res) => {
         const { comment } = req.body;
         const commenterId = req.user.id;
 
-        const commenter = await User.findById(commenterId).select('name username');
+        const commenter = await User.findById(commenterId).select('name username profile_image');
         if (!commenter) {
             return res.status(404).send({ error: 'Commenter not found' });
         }
-
         const post = await BlogPost.findById(req.params.id);
         if (!post) {
             return res.status(404).send({ error: 'Post not found' });
@@ -23,9 +22,10 @@ router.post('/:id/comment', auth, async (req, res) => {
             commenter: commenterId,
             commenterName: commenter.name,
             commenterUsername: commenter.username,
+            commenterProfile: commenter.profile_image,
             comment
         });
-
+        console.log(post)
         await post.save();
         res.status(201).send(post);
     } catch (error) {

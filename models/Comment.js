@@ -6,6 +6,10 @@ const CommentSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true
     },
+    commenterProfile: {
+        type: String,
+        required: true
+    },
     commenterName: {
         type: String,
         required: true
