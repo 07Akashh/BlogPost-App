@@ -11,7 +11,6 @@ const router = express.Router();
 router.post('/register', validationRules(), async (req, res) => {
     const { name, username, email, password, phone, gender } = req.body;
     const errors = validationResult(req);
-    console.log(errors)
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
@@ -49,7 +48,7 @@ router.post('/login', async (req, res) => {
         let user = await User.findOne({ $or: [{ email: username.toLowerCase() }, { username: username.toLowerCase() }] });
 
         if (!user) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Invalid username or Email' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
