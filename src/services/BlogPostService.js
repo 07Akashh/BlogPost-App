@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3002/api/posts';
+const API_URL = 'http://blogpost-api.us-east-1.elasticbeanstalk.com/api/posts';
 
 const token = localStorage.getItem('token');
 export const addComment = async (postId, comment) => {

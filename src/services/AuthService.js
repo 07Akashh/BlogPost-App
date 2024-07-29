@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3002/api/users';
+const API_URL = 'http://blogpost-api.us-east-1.elasticbeanstalk.com/api/users';
 
 const register = async (userData) => {
     console.log(userData)
