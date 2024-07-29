@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getUserPosts } from '../../services/BlogPostService';
 import { getInitials, getTimeSinceCreation } from '../utils/utils';
-import PostActions from './post_component/PostActions';
-import PostContent from './post_component/PostContent';
-import PostMedia from './post_component/PostMedia';
-import UserInfo from './post_component/UserInfo';
+import ModalPostActions from './post_content/ModalPostActions';
+import PostContent from './post_content/PostContent';
+import PostMedia from './post_content/PostMedia';
+import UserInfo from './post_content/UserInfo';
 
 const PostsList = ({ onPostClick }) => {
     const [posts, setPosts] = useState([]);
@@ -48,7 +48,7 @@ const PostsList = ({ onPostClick }) => {
                             />
                             <PostMedia postUrl={post.post_url} />
                             <PostContent title={post.title} content={post.content} />
-                            <PostActions onPostClick={() => onPostClick(post._id)} />
+                            <ModalPostActions onPostClick={() => onPostClick(post._id)} />
                         </li>
                     ))}
                 </ul>

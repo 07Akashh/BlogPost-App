@@ -32,3 +32,4 @@ export const getInitials = (name) => {
         : nameArray[0][0];
     return initials.toUpperCase();
 };
+

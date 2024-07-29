@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
-import Profile from '../profile/Profile';
-import BlogPostModal from '../post/BlogPostModal';
-import UserList from '../user/UserList';
 import Logout from '../authentication/Logout';
+import BlogPostModal from '../post/post_component/BlogPostModal';
+import Profile from '../profile/Profile';
+import UserList from '../user/UserList';
 
 const Content = ({ activeSection, user, handleProfileUpdate }) => {
     const renderSection = useCallback(() => {

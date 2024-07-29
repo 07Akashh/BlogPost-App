@@ -1,7 +1,7 @@
 import React from 'react';
-import Modal from '../../shared/Modal';
-import AddPost from '../../post/AddPost';
 import { FaPlus } from 'react-icons/fa';
+import AddPost from '../../post/post_component/AddPost';
+import Modal from '../../shared/Modal';
 
 const AddPostButton = ({ handleUpdatePosts }) => (
     <>

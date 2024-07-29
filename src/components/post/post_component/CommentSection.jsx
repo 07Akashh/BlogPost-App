@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addComment, getComments } from '../../services/BlogPostService';
+import { addComment, getComments } from '../../../services/BlogPostService';
 
 const CommentSection = ({ postId }) => {
     const [comments, setComments] = useState([]);

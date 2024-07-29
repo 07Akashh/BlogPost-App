@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getBlogPostById } from '../../services/BlogPostService';
+import { getBlogPostById } from '../../../services/BlogPostService';
+import CommentPostActions from '../post_content/CommentPostAction';
+import PostContent from '../post_content/PostContent';
+import PostHeader from '../post_content/PostHeader';
+import PostMedia from '../post_content/PostMedia';
 import CommentSection from './CommentSection';
-import PostActions from './post_component/PostActions';
-import PostContent from './post_component/PostContent';
-import PostHeader from './post_component/PostHeader';
-import PostMedia from './post_component/PostMedia';
 
 const BlogPostDetail = () => {
     const { id } = useParams();
@@ -51,7 +51,7 @@ const BlogPostDetail = () => {
                     <PostHeader author={post?.author} createdAt={post?.createdAt} />
                     <PostMedia postUrl={post.post_url} />
                     <PostContent title={post.title} content={post.content} />
-                    <PostActions postId={post._id} toggleComments={toggleComments} />
+                    <CommentPostActions postId={post._id} toggleComments={toggleComments} />
                     {showComments[post._id] && <CommentSection postId={post._id} />}
                 </div>
             </div>

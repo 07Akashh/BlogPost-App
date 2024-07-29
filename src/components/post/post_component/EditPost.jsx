@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { updatePost } from '../../services/BlogPostService';
+import React, { useEffect, useState } from 'react';
+import { updatePost } from '../../../services/BlogPostService';
 
 const EditPost = ({ postId, initialData, onEditComplete }) => {
     const [formData, setFormData] = useState(initialData);

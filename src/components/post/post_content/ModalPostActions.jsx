@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PostActions = ({ onPostClick }) => (
+const ModalPostActions = ({ onPostClick }) => (
     <div className="flex items-center justify-between text-slate-500">
         <div className="flex space-x-4 md:space-x-8">
             <div className="flex cursor-pointer items-center transition hover:text-slate-600" onClick={onPostClick}>
@@ -19,4 +19,4 @@ const PostActions = ({ onPostClick }) => (
     </div>
 );
 
-export default PostActions;
+export default ModalPostActions;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import PostsList from './PostsList';
+import PostsList from '../PostsList';
 
-const BlogPostModal = () => {
+const BlogPostModal = ( posts ) => {
     const [selectedPostUrl, setSelectedPostUrl] = useState(null);
 
     const openModal = (postId) => {
