@@ -4,11 +4,11 @@ import BlogPostModal from '../post/post_component/BlogPostModal';
 import Profile from '../profile/Profile';
 import UserList from '../user/UserList';
 
-const Content = ({ activeSection, user, handleProfileUpdate }) => {
+const Content = ({ activeSection, user, handleProfileUpdate,handleClose }) => {
     const renderSection = useCallback(() => {
         switch (activeSection) {
             case 'profile':
-                return <Profile handleProfileUpdate={handleProfileUpdate} user={user} />;
+                return <Profile handleProfileUpdate={handleProfileUpdate} user={user} handleClose={handleClose}/>;
             case 'home':
                 return <BlogPostModal />;
             case 'users':
@@ -18,7 +18,7 @@ const Content = ({ activeSection, user, handleProfileUpdate }) => {
             default:
                 return <BlogPostModal />;
         }
-    }, [activeSection, handleProfileUpdate, user]);
+    }, [activeSection, handleProfileUpdate, user, handleClose]);
 
     return <div className=" w-full p-4">{renderSection()}</div>;
 };

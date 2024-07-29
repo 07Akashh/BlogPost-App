@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from '../../shared/Modal';
 import ProfileUpdate from './ProfileUpdate';
 
-const ProfileHeader = ({ user, currentUserId, shouldShowModal, handleProfileUpdate, getInitials }) => (
+const ProfileHeader = ({ user, shouldShowModal, handleProfileUpdate, getInitials }) => (
     
     <div className='sm:flex px-3 justify-between'>
         {user.profile_image ? (

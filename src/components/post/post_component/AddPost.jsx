@@ -3,6 +3,9 @@ import { createPost } from '../../../services/BlogPostService';
 import Input from '../../shared/Input';
 import MediaInput from '../../shared/MediaInput';
 import Textarea from '../../shared/TextArea';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { createFormData } from '../../utils/utils';
 
 const AddPost = ({ onPostAdded, closeButton }) => {
     const [formData, setFormData] = useState(initializeFormData());
@@ -23,14 +26,14 @@ const AddPost = ({ onPostAdded, closeButton }) => {
         setUploading(true);
 
         try {
-            console.log('Form data before sending:', formData);
             const formDataObject = createFormData(formData);
             await createPost(formDataObject);
             setPostAdded(true);
+            toast.success('Post added successfully!');
             onPostAdded?.();
-
             setFormData(initializeFormData());
         } catch (error) {
+            toast.error('Failed to add post.');
             console.error('Error adding post:', error);
         } finally {
             setUploading(false);
@@ -48,34 +51,37 @@ const AddPost = ({ onPostAdded, closeButton }) => {
     }, [postAdded]);
 
     return (
-        <div className="bg-gray-100 border border-gray-300 p-5 rounded-lg shadow w-full max-w-lg mx-auto">
-            {closeButton}
-            <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
-                <Input
-                    type="text"
-                    name="title"
-                    value={formData.title}
-                    handleChange={handleChange}
-                    placeholder="Title"
-                />
-                <Textarea
-                    name="content"
-                    value={formData.content}
-                    handleChange={handleChange}
-                    placeholder="Content"
-                />
-                <MediaInput
-                    previewMedia={formData.media}
-                    onClick={handleMediaClick}
-                    fileInputRef={fileInputRef}
-                    handleChange={handleChange}
-                />
-                <button type="submit" disabled={uploading} className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-                    Add Post
-                </button>
-            </form>
-            {uploading && <p>Uploading...</p>}
-        </div>
+        <>
+            <ToastContainer />
+            <div className="bg-gray-100 border border-gray-300 p-5 rounded-lg shadow w-full max-w-lg mx-auto">
+                {closeButton}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
+                    <Input
+                        type="text"
+                        name="title"
+                        value={formData.title}
+                        handleChange={handleChange}
+                        placeholder="Title"
+                    />
+                    <Textarea
+                        name="content"
+                        value={formData.content}
+                        handleChange={handleChange}
+                        placeholder="Content"
+                    />
+                    <MediaInput
+                        previewMedia={formData.media}
+                        onClick={handleMediaClick}
+                        fileInputRef={fileInputRef}
+                        handleChange={handleChange}
+                    />
+                    <button type="submit" disabled={uploading} className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+                        Add Post
+                    </button>
+                </form>
+                {uploading && <p>Uploading...</p>}
+            </div>
+        </>
     );
 };
 
@@ -85,14 +91,5 @@ const initializeFormData = () => ({
     media: ''
 });
 
-const createFormData = (formData) => {
-    const data = new FormData();
-    for (const key in formData) {
-        if (formData[key]) {
-            data.append(key, formData[key]);
-        }
-    }
-    return data;
-};
 
 export default AddPost;

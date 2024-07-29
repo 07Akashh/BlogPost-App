@@ -33,3 +33,32 @@ export const getInitials = (name) => {
     return initials.toUpperCase();
 };
 
+export const createFormData = (formData) => {
+    const data = new FormData();
+    for (const key in formData) {
+        if (formData[key]) {
+            data.append(key, formData[key]);
+        }
+    }
+    return data;
+};
+
+export const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+export const InitializeFormData = (user) => ({
+    name: user?.name || '',
+    username: user?.username || '',
+    email: user?.email || '',
+    phone: user?.phone || '',
+    gender: user?.gender || '',
+    bio: user?.bio || '',
+    profile_image: user?.profile_image || 'default-profile.png'
+});
+
+export const isImage = (url) => {
+    return /\.(jpeg|jpg|gif|png)$/i.test(url);
+};
+
+export const isVideo = (url) => {
+    return /\.(mp4|webm|ogg)$/i.test(url);
+};

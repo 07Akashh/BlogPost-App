@@ -1,9 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { addComment, getComments } from '../../../services/BlogPostService';
+import { CommentSection } from 'react-comments-section';
+import 'react-comments-section/dist/index.css';
+import { fetchProfileData } from '../../utils/userProfile';
 
-const CommentSection = ({ postId }) => {
+const CommentSectionComponent = ({ postId }) => {
     const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState('');
+    const [profile, setProfile] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const getProfile = async () => {
+            try {
+                const data = await fetchProfileData();
+                setProfile(data);
+            } catch (error) {
+                setError('Failed to fetch profile data.');
+            }
+        };
+
+        getProfile();
+    }, []);
 
     useEffect(() => {
         const fetchComments = async () => {
@@ -18,19 +35,14 @@ const CommentSection = ({ postId }) => {
         fetchComments();
     }, [postId]);
 
-    const handleCommentChange = (e) => {
-        setNewComment(e.target.value);
-    };
 
-    const handleCommentSubmit = async (e) => {
-        e.preventDefault();
-        if (!newComment.trim()) {
+    const handleCommentSubmit = async (text) => {
+        if (!text.trim()) {
             console.error('Comment cannot be empty');
             return;
         }
         try {
-            await addComment(postId, newComment);
-            setNewComment('');
+            await addComment(postId, text);
             const updatedComments = await getComments(postId);
             setComments(updatedComments);
         } catch (error) {
@@ -38,26 +50,38 @@ const CommentSection = ({ postId }) => {
         }
     };
 
+    if (error) return <div>{error}</div>;
+    if (!profile) return <div>Loading...</div>;
+
+    const formattedComments = comments.map(comment => ({
+        userId: comment._id,
+        comId: comment._id,
+        fullName: comment.commenterName,
+        text: comment.comment,
+        avatarUrl: profile.profile_image,
+        replies: []
+    }));
+
     return (
         <div>
-            <ul>
-                {comments.map((comment) => (
-                    <li key={comment._id}>
-                        <strong>{comment.commenterName} ({comment.commenterUsername}):</strong> {comment.comment}
-                    </li>
-                ))}
-            </ul>
-            <form onSubmit={handleCommentSubmit}>
-                <textarea
-                    value={newComment}
-                    onChange={handleCommentChange}
-                    placeholder="Add a comment"
-                    required
-                />
-                <button type="submit">Submit</button>
-            </form>
+            <CommentSection
+                currentUser={{
+                    currentUserId: profile.username,
+                    currentUserProfile:profile._id,
+                    currentUserFullName: profile.name
+                }}
+                logIn={{
+                    loginLink: 'http://localhost:3001/',
+                    signupLink: 'http://localhost:3001/'
+                }}
+                commentData={formattedComments}
+                onSubmitAction={({ text }) => {
+                    handleCommentSubmit(text);
+                    console.log('check submit', { text });
+                }}
+            />
         </div>
     );
 };
 
-export default CommentSection;
+export default CommentSectionComponent;

@@ -21,8 +21,6 @@ const EditPost = ({ postId, initialData, onEditComplete }) => {
         setLoading(true);
         try {
             const updatedData = await updatePost(postId, formData);
-            console.log(formData)
-            console.log(initialData)
             onEditComplete(updatedData);
         } catch (err) {
             setError(err.message);

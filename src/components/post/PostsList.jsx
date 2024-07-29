@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { getUserPosts } from '../../services/BlogPostService';
-import { getInitials, getTimeSinceCreation } from '../utils/utils';
-import ModalPostActions from './post_content/ModalPostActions';
-import PostContent from './post_content/PostContent';
-import PostMedia from './post_content/PostMedia';
-import UserInfo from './post_content/UserInfo';
+import { useEffect, useState } from "react";
+import { getUserPosts } from "../../services/BlogPostService";
+import UserInfo from "./post_content/UserInfo";
+import { getInitials, getTimeSinceCreation } from "../utils/utils";
+import PostMedia from "./post_content/PostMedia";
+import PostContent from "./post_content/PostContent";
+import ModalPostActions from "./post_content/ModalPostActions";
 
 const PostsList = ({ onPostClick }) => {
     const [posts, setPosts] = useState([]);

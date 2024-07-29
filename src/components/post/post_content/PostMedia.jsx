@@ -1,5 +1,5 @@
 import React from 'react';
-import { isImage, isVideo } from '../../shared/CheckPost';
+import { isImage, isVideo } from '../../utils/utils';
 
 const PostMedia = ({ postUrl }) => (
     <div className='mt-2 border-gray-300 p-1 rounded-lg'>

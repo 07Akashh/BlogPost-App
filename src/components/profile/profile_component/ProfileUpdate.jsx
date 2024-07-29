@@ -1,13 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import UserService from '../../../services/UserService';
-import Input from '../../shared/Input';
-import ProfileImage from '../../shared/ProfileImage';
-import SelectInput from '../../shared/SelectInput';
-import TextArea from '../../shared/TextArea';
-import capitalize from '../../shared/capitalize';
-import CreateFormData from '../../shared/createFormData';
-import InitializeFormData from '../../shared/initializeFormData';
-
+import { ProfileUpdateForm } from '../../shared/ProfileUpdateForm';
+import { createFormData, InitializeFormData } from '../../utils/utils';
 
 const ProfileUpdate = ({ user, onProfileUpdate, closeButton }) => {
     const [formData, setFormData] = useState(() => InitializeFormData(user));
@@ -29,71 +25,42 @@ const ProfileUpdate = ({ user, onProfileUpdate, closeButton }) => {
     const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
         setUploading(true);
-
         try {
-            await UserService.updateProfile(CreateFormData(formData));
+            await UserService.updateProfile(createFormData(formData));
+            toast.success('Profile updated successfully!');
             onProfileUpdate?.();
+            closeButton?.();
         } catch (error) {
             console.error('Error updating profile:', error);
+            toast.error('Failed to update profile.');
         } finally {
             setUploading(false);
         }
-    }, [formData, onProfileUpdate]);
+    }, [formData, onProfileUpdate, closeButton]);
 
     const handleImageClick = useCallback(() => {
         fileInputRef.current.click();
     }, []);
 
     return (
-        <div className="m-5 p-5 border border-gray-300 rounded-lg bg-gray-100 max-w-lg mx-auto relative">
-            {closeButton}
-            <form onSubmit={handleSubmit} className="flex flex-col">
-                <ProfileImage
-                    previewImage={formData.profile_image}
-                    onClick={handleImageClick}
+        <>
+        <ToastContainer />
+            <div className="m-5 p-5 border border-gray-300 rounded-lg bg-gray-100 max-w-lg mx-auto relative">
+                {closeButton}
+                <ProfileUpdateForm
+                    formData={formData}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                    uploading={uploading}
+                    handleImageClick={handleImageClick}
                     fileInputRef={fileInputRef}
-                    handleChange={handleChange}
                 />
-                {['name', 'username'].map(field => (
-                    <Input
-                        type='text'
-                        key={field}
-                        name={field}
-                        value={formData[field]}
-                        handleChange={handleChange}
-                        placeholder={capitalize(field)}
-                    />
-                ))}
-                <Input
-                    type='email'
-                    name="email"
-                    value={formData.email}
-                    handleChange={handleChange}
-                />
-                <Input
-                    type='number'
-                    name="phone"
-                    value={formData.phone}
-                    handleChange={handleChange}
-                />
-                <TextArea
-                    name="bio"
-                    value={formData.bio}
-                    handleChange={handleChange}
-                />
-                <SelectInput
-                    name="gender"
-                    value={formData.gender}
-                    handleChange={handleChange}
-                    options={['Male', 'Female', 'Custom']}
-                />
-                <button type="submit" disabled={uploading} className="bg-blue-500 text-white py-2 px-4 rounded-md">
-                    Update Profile
-                </button>
-            </form>
-            {uploading && <p>Uploading...</p>}
-        </div>
+                {uploading && <p>Uploading...</p>}
+            </div>
+        </>
     );
 };
+
+
 
 export default ProfileUpdate;

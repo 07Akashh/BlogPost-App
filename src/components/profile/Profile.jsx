@@ -5,7 +5,8 @@ import ProfileHeader from './profile_component/ProfileHeader';
 import { getInitials } from '../utils/utils';
 import UserPostsSection from './profile_component/UserPostSection';
 
-const Profile = ({ handleProfileUpdate, user }) => {
+const Profile = ({ handleProfileUpdate, user, handleClose }) => {
+
     const [currentUserId, setCurrentUserId] = useState(null);
     const [error, setError] = useState(null);
     const [posts, setPosts] = useState([]);
@@ -74,6 +75,8 @@ const Profile = ({ handleProfileUpdate, user }) => {
                             handleUpdatePosts={handleUpdatePosts}
                             currentUserId={currentUserId}
                             handleDelete={handleDelete}
+                            handleProfileUpdate
+                            closeButton={handleClose}
                         />
                     </div>
                 </div>
