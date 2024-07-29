@@ -1,6 +1,6 @@
 import React from 'react';
 import AddPostButton from './AddPostButton';
-import UserPostList from '../../user/UserProfilePostList';
+import UserPostList from '../../../user/UserProfilePostList';
 const UserPostsSection = ({ user, posts, handleUpdatePosts, handleDelete, currentUserId }) => (
     
     <div className='mb-36'>

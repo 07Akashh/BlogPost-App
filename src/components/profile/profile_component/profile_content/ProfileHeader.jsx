@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../../shared/Modal';
+import Modal from '../../../shared/Modal';
 import ProfileUpdate from './ProfileUpdate';
 
 const ProfileHeader = ({ user, shouldShowModal, handleProfileUpdate, getInitials }) => (

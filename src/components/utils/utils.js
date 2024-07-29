@@ -65,3 +65,7 @@ export const isImage = (url) => {
 export const isVideo = (url) => {
     return /\.(mp4|webm|ogg)$/i.test(url);
 };
+
+export const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};

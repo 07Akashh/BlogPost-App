@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import UserService from '../../../services/UserService';
-import { ProfileUpdateForm } from '../../shared/ProfileUpdateForm';
-import { createFormData, InitializeFormData } from '../../utils/utils';
+import UserService from '../../../../services/UserService';
+import { ProfileUpdateForm } from '../../../shared/ProfileUpdateForm';
+import { createFormData, InitializeFormData } from '../../../utils/utils';
 
 const ProfileUpdate = ({ user, onProfileUpdate, closeButton }) => {
     const [formData, setFormData] = useState(() => InitializeFormData(user));
