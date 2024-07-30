@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://blogpost-api.us-east-1.elasticbeanstalk.com/api/users';
+const API_URL = 'https://www.blogpost-api.run.place/api/users';
 
 const getProfile = async () => {
     try {

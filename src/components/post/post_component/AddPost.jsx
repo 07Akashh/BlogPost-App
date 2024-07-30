@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { createPost } from '../../../services/BlogPostService';
 import Input from '../../shared/Input';
 import MediaInput from '../../shared/MediaInput';
@@ -10,7 +10,6 @@ import { createFormData } from '../../utils/utils';
 const AddPost = ({ onPostAdded, closeButton }) => {
     const [formData, setFormData] = useState(initializeFormData());
     const [uploading, setUploading] = useState(false);
-    const [postAdded, setPostAdded] = useState(false);
     const fileInputRef = useRef(null);
 
     const handleChange = useCallback((e) => {
@@ -28,10 +27,12 @@ const AddPost = ({ onPostAdded, closeButton }) => {
         try {
             const formDataObject = createFormData(formData);
             await createPost(formDataObject);
-            setPostAdded(true);
-            toast.success('Post added successfully!');
-            onPostAdded?.();
             setFormData(initializeFormData());
+            toast.success('Post added successfully!');
+            setTimeout(() => {
+                onPostAdded?.();
+                window.location.reload()
+            }, 1000);
         } catch (error) {
             toast.error('Failed to add post.');
             console.error('Error adding post:', error);
@@ -43,12 +44,6 @@ const AddPost = ({ onPostAdded, closeButton }) => {
     const handleMediaClick = useCallback(() => {
         fileInputRef.current.click();
     }, []);
-
-    useEffect(() => {
-        if (postAdded) {
-            window.location.reload();
-        }
-    }, [postAdded]);
 
     return (
         <>
@@ -90,6 +85,5 @@ const initializeFormData = () => ({
     content: '',
     media: ''
 });
-
 
 export default AddPost;

@@ -29,6 +29,11 @@ const ProfileUpdate = ({ user, onProfileUpdate, closeButton }) => {
             await UserService.updateProfile(createFormData(formData));
             onProfileUpdate?.();
             closeButton?.();
+            console.log('object')
+            setTimeout(() => {
+                setUploading(false)
+            toast.success('Profile updated successfully')
+            }, 1000);
         } catch (error) {
             console.error('Error updating profile:', error);
             toast.error('Failed to update profile.');
