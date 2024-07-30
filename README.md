@@ -22,10 +22,10 @@ User BlogSpot is a comprehensive blogging application where users can create, ed
 
 ## Tech Stack
 - Frontend: React, React Router, Tailwind CSS, React Icons, React Toastify
-- Backend: Node.js, Express
+- Backend: Node.js, Express, Cloudinary
 - Database: MongoDB
 - Authentication: JWT (JSON Web Tokens)
-- Deployment: Render for Backend ,Vercel For frontend
+- Deployment: AWS EC2 for Backend, AWS Amplify For the frontend
 
 ## Setup Instructions
 
@@ -40,8 +40,8 @@ To set up the project locally, follow these steps:
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/user-blogspot.git
-cd user-blogspot
+git clone https://github.com/07Akashh/BlogPost-App.git
+cd BlogPost-App
 ```
 ## Install dependencies
 
@@ -90,16 +90,16 @@ Certainly! Here's the content formatted as a `README.md` file:
 ## Approach and Challenges
 
 ### Approach
-The project is built with a clear separation of concerns between the frontend and backend. React is used to build reusable components, while React Router manages routing. Tailwind CSS is employed for styling, ensuring a responsive design. The backend uses Node.js and Express to create RESTful APIs, and MongoDB is used to store user data and blog posts.
+The project is built with a clear separation of concerns between the front end and backend. React is used to build reusable components, while React Router manages routing. Tailwind CSS is employed for styling, ensuring a responsive design. The backend uses Node.js and Express to create RESTful APIs, and MongoDB is used to store user data and blog posts.
 
 ### Challenges
 
-- **State Management**: Managing state across different components, especially with nested components, was challenging. React hooks like `useState`, `useEffect`, and `useCallback` were heavily used to manage state and side effects.
-- **Responsive Design**: Ensuring the application is responsive and provides a good user experience on both desktop and mobile devices required careful planning and implementation, especially with the sidebar and bottom navigation components.
-- **Authentication**: Implementing a secure authentication system using JWTs required careful handling of tokens and protected routes both on the frontend and backend.
+- **State Management**: Managing states across different components, especially with nested components, was challenging. React hooks like `useState`, `useEffect`, and `useCallback` were heavily used to manage state and side effects.
+- **Responsive Design**: Ensuring the application is responsive and provides a good user experience on both desktop and mobile devices requires careful planning and implementation, especially with the sidebar and bottom navigation components.
+- **Authentication**: Implementing a secure authentication system using JWTs requires careful handling of tokens and protected routes both on the front end and back end.
 
 ## Live Demo
-Check out the live demo of the application [here](https://bog-spot-app.vercel.app/).
+Check out the live demo of the application [here](https://frontend.d2h1bu56tz9kds.amplifyapp.com/user/66a3196df28a0ad4cc32f946).
 
 ## License
 This project is licensed under the MIT License.
