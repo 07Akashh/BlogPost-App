@@ -25,7 +25,7 @@ User BlogSpot is a comprehensive blogging application where users can create, ed
 - Backend: Node.js, Express
 - Database: MongoDB
 - Authentication: JWT (JSON Web Tokens)
-- Deployment: [Your Deployment Platform]
+- Deployment: Render for Backend ,Vercel For frontend
 
 ## Setup Instructions
 
