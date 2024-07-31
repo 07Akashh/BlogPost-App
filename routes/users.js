@@ -30,10 +30,15 @@ router.post('/register', validationRules(), async (req, res) => {
         user.password = await bcrypt.hash(password, 10);
         await user.save();
         const payload = {
-            id: user.id
+            user: {
+                id: user.id
+            }
         };
-        const token = jwt.sign(payload,process.env.JWT_SECRET);
-        res.status(201).json({ user, token });
+        jwt.sign(payload, process.env.JWT_SECRET, (err, token) => {
+            if (err) throw err;
+            res.setHeader('Authorization', 'Bearer' + token);
+            res.json({ token });
+        });
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).json({ message: 'Server error' });
@@ -84,8 +89,8 @@ router.get('/users', auth, async (req, res) => {
 });
 
 router.get('/profile', auth, async (req, res) => {
+    const userId = req.user.id;
     try {
-        const userId = req.user.id;
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: `User not found ${req.user}` });
@@ -95,6 +100,8 @@ router.get('/profile', auth, async (req, res) => {
         res.send(error)
     }
 });
+
+
 
 router.get('/profile/:id', auth, async (req, res) => {
     try {
