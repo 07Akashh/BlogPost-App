@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'https://www.blogpost-api.run.place/api/users';
-
+const API_URL = 'https://blogpost-api.run.place/api/users';
+const token = localStorage.getItem('token');
 const getProfile = async () => {
     try {
         const response = await axios.get(`${API_URL}/profile`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            headers: { Authorization: `Bearer ${token}` }
         });
         return response.data;
     } catch (error) {
@@ -23,7 +23,6 @@ const getProfile = async () => {
 };
 
 const updateProfile = async (formData) => {
-    const token = localStorage.getItem('token');
     try {
         const response = await axios.patch(`${API_URL}/profile`, formData, {
             headers: {
@@ -47,7 +46,6 @@ const updateProfile = async (formData) => {
 };
 
 const getAllUsers = async () => {
-    const token = localStorage.getItem('token');
     try {
         const response = await axios.get(`${API_URL}/users`, {
             headers: {
@@ -71,7 +69,6 @@ const getAllUsers = async () => {
 };
 const getUserById = async (userId) => {
     try {
-        const token = localStorage.getItem('token');
         if (!token) {
             throw new Error('No token found');
         }

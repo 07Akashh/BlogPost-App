@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://www.blogpost-api.run.place/api/users';
+const API_URL = 'https://blogpost-api.run.place/api/users';
 
 const register = async (userData) => {
     console.log(userData)

@@ -14,11 +14,12 @@ const Dashboard = () => {
                 setUser(userData);
             } catch (err) {
                 setError(err.message);
+                console.log(error)
             }
         };
 
         fetchProfile();
-    }, []);
+    }, [error]);
 
     useEffect(() => {
         localStorage.setItem('activeSection', activeSection);
@@ -30,8 +31,9 @@ const Dashboard = () => {
             setUser(updatedUser);
         } catch (err) {
             setError(err.message);
+            console.log(error)
         }
-    }, []);
+    }, [error]);
 
     if (error) {
         return <div>Error: {error}</div>;

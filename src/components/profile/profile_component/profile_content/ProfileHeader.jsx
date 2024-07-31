@@ -4,14 +4,15 @@ import ProfileUpdate from './ProfileUpdate';
 
 const ProfileHeader = ({ user, shouldShowModal, handleProfileUpdate, getInitials }) => (
     
-    <div className='sm:flex px-3 mt-5 justify-between'>
+    <div className='sm:flex px-3 mt-3 sm:justify-between'>
         {user.profile_image ? (
-            <img src={user.profile_image} alt="profile_image" className="mx-auto mb-3 sm:mb-0 h-20 w-20 sm:h-36 sm:w-36 rounded-full ring-2 ring-white" />
+                <img src={user.profile_image} alt="profile_image" className="sm:mx-auto mb-3 sm:mb-0 h-20 w-20 sm:h-36 sm:w-36 rounded-full ring-2 ring-white" />
         ) : (
-            <div className='m-auto mb-3 sm:mb-0 h-20 w-20 sm:h-36 sm:w-36 rounded-full bg-gray-400 flex items-center justify-center text-white text-7xl font-semibold'>
+            <div className='sm:m-auto mb-3 sm:mb-0 h-20 w-20 sm:h-36 sm:w-36 rounded-full bg-gray-400 flex items-center justify-center text-white text-3xl sm:text-7xl font-semibold'>
                 {getInitials(user.name)}
             </div>
         )}
+        
         <div className='w-full sm:w-2/3'>
             <div className='flex gap-6'>
                 <h1 className='font-semibold font-mono text-2xl'>{user.username}</h1>

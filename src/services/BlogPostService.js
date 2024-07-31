@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://www.blogpost-api.run.place/api/posts';
+const API_URL = 'https://blogpost-api.run.place/api/posts';
 
 const token = localStorage.getItem('token');
 export const addComment = async (postId, comment) => {
@@ -31,7 +31,6 @@ export const addComment = async (postId, comment) => {
 
 export const updatePost = async (postId, data) => {
     try {
-        console.log(data)
         const response = await axios.patch(`${API_URL}/${postId}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -79,7 +78,11 @@ export const getPostsByAuthor = async (authorId) => {
 
 export const getComments = async (postId) => {
     try {
-        const response = await axios.get(`${API_URL}/${postId}/comments`);
+        const response = await axios.get(`${API_URL}/${postId}/comments`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         if (error.response) {
