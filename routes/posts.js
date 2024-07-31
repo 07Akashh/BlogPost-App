@@ -30,7 +30,7 @@ router.post('/add', auth, async (req, res) => {
     }
 });
 
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const posts = await BlogPost.find().populate('author');
         res.send(posts);

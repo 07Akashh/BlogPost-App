@@ -8,7 +8,6 @@ router.post('/:id/comment', auth, async (req, res) => {
     try {
         const { comment } = req.body;
         const commenterId = req.user.id;
-
         const commenter = await User.findById(commenterId).select('name username profile_image');
         if (!commenter) {
             return res.status(404).send({ error: 'Commenter not found' });
@@ -33,7 +32,7 @@ router.post('/:id/comment', auth, async (req, res) => {
     }
 });
 
-router.get('/:id/comments', async (req, res) => {
+router.get('/:id/comments',auth, async (req, res) => {
     try {
         const post = await BlogPost.findById(req.params.id).populate('comments.commenter', 'name username');
         if (!post) {
