@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3002/api/users';
+const API_URL = 'https://the-blog-five.vercel.app/api/users';
 
 const register = async (userData) => {
     try {
