@@ -5,7 +5,7 @@ const ProfileImage = ({ previewImage, onClick, fileInputRef, handleChange }) => 
         <img
             src={previewImage instanceof File ? URL.createObjectURL(previewImage) : previewImage}
             alt="Profile"
-            className="w-36 h-36 rounded-full object-cover border-2 border-blue-500"
+            className="w-36 h-36 rounded-full object-cover border-2 border-black"
         />
         <input
             type="file"

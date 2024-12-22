@@ -1,4 +1,4 @@
-import { capitalize } from "../utils/utils";
+import { capitalize } from "../../utils/utils";
 import Input from "./Input";
 import ProfileImage from "./ProfileImage";
 import SelectInput from "./SelectInput";
@@ -45,7 +45,7 @@ export const ProfileUpdateForm = ({ formData, handleChange, handleSubmit, upload
             handleChange={handleChange}
             options={['Male', 'Female', 'Custom']}
         />
-        <button type="submit" disabled={uploading} className="bg-blue-500 text-white py-2 px-4 rounded-md">
+        <button type="submit" disabled={uploading} className="bg-black text-white py-2 px-4 rounded-md">
         {uploading ? 'Updating...' : 'Update Profile'}
         </button>
     </form>

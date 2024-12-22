@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { updatePost } from '../../../services/BlogPostService';
+import { updatePost } from '../../../redux/services/BlogPostService';
 
 const EditPost = ({ postId, initialData, onEditComplete }) => {
     const [formData, setFormData] = useState(initialData);
@@ -61,7 +61,7 @@ const EditPost = ({ postId, initialData, onEditComplete }) => {
                 </div>
                 <button
                     type="submit"
-                    className="bg-blue-500 text-white p-2 rounded"
+                    className="bg-black text-white p-2 rounded"
                     disabled={loading}
                 >
                     {loading ? 'Saving...' : 'Save'}

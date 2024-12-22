@@ -1,0 +1,18 @@
+import React from 'react';
+import AddPostButton from './AddPostButton';
+import UserPostList from '../user/UserProfilePostList';
+const UserPostsSection = ({ user, posts, handleUpdatePosts, handleDelete, currentUserId }) => (
+    
+    <div className='mb-36'>
+        <div className='flex justify-between items-center px-5'>
+            <h2 className='font-semibold text-xl'>Posts by {user.name}</h2>
+            {user._id === currentUserId && (
+            <AddPostButton handleUpdatePosts={handleUpdatePosts} />
+            )}
+        </div>
+        <hr className='my-8 z-0' />
+        <UserPostList posts={posts} onUpdate={handleUpdatePosts} onDelete={handleDelete} currentUserId={currentUserId} />
+    </div>
+);
+
+export default UserPostsSection;

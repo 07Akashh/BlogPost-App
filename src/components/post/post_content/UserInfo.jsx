@@ -12,7 +12,7 @@ const UserInfo = ({ author, createdAt, getTimeSinceCreation, getInitials }) => (
                         {getInitials(author.name)}
                     </div>
                 )}
-                <div className="text-lg font-bold text-slate-700">{author.name}</div>
+                <div className="text-lg font-bold line-clamp-1 text-slate-700">{author.name}</div>
             </div>
         </Link>
         <div className="flex items-center space-x-8">

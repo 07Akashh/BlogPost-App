@@ -1,11 +1,11 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { createPost } from '../../../services/BlogPostService';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { createPost } from '../../../redux/services/BlogPostService';
+import { createFormData } from '../../../utils/utils';
 import Input from '../../shared/Input';
 import MediaInput from '../../shared/MediaInput';
 import Textarea from '../../shared/TextArea';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { createFormData } from '../../utils/utils';
 
 const AddPost = ({ onPostAdded, closeButton }) => {
     const [formData, setFormData] = useState(initializeFormData());
@@ -70,11 +70,15 @@ const AddPost = ({ onPostAdded, closeButton }) => {
                         fileInputRef={fileInputRef}
                         handleChange={handleChange}
                     />
-                    <button type="submit" disabled={uploading} className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-                        Add Post
+                    <button
+                        type="submit"
+                        disabled={uploading}
+                        className={`py-2 rounded text-white ${uploading ? "bg-gray-400 cursor-not-allowed" : "bg-black hover:bg-black/80"
+                            }`}
+                    >
+                        {uploading ? "Uploading..." : "Add Post"}
                     </button>
                 </form>
-                {uploading && <p>Uploading...</p>}
             </div>
         </>
     );

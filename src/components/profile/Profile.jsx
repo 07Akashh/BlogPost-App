@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import useProfile from '../hooks/useProfile';
-import usePosts from '../hooks/usePosts';
-import ProfileContent from './profile_component/ProfileContent';
+import ProfileContent from './ProfileContent';
+import usePosts from '../../hooks/usePosts';
+import useProfile from '../../hooks/useProfile';
 
 const Profile = ({ handleProfileUpdate, user, handleClose }) => {
     const { currentUserId, error: profileError } = useProfile();

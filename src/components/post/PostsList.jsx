@@ -1,30 +1,16 @@
-import { useEffect, useState } from "react";
-import { getUserPosts } from "../../services/BlogPostService";
-import UserInfo from "./post_content/UserInfo";
-import { getInitials, getTimeSinceCreation } from "../utils/utils";
-import PostMedia from "./post_content/PostMedia";
-import PostContent from "./post_content/PostContent";
-import ModalPostActions from "./post_content/ModalPostActions";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserPosts } from "../../redux/slices/blogPostSlice";
+import { PostCard } from "./PostCard";
 
-const PostsList = ({ onPostClick }) => {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+const PostsList = () => {
+    const dispatch = useDispatch();
+    const { posts, loading, error } = useSelector((state) => state.blogPost);
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const data = await getUserPosts();
-                setPosts(data);
-                setLoading(false);
-            } catch (err) {
-                setError(err.message);
-                setLoading(false);
-            }
-        };
-
-        fetchPosts();
-    }, []);
+        dispatch(fetchUserPosts());
+        document.title = 'BlogPost';
+    }, [dispatch]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -35,20 +21,12 @@ const PostsList = ({ onPostClick }) => {
     }
 
     return (
-        <div className='justify-center h-screen flex'>
-            <div className='items-center overflow-scroll no-scrollbar justify-center min-h-screen w-full  lg:w-2/3'>
-                <ul className='w-full mb-16 sm:mb-10'>
-                    {posts.map(post => (
-                        <li className="rounded-xl border p-5 shadow-md w-full bg-white mb-5" key={post._id}>
-                            <UserInfo
-                                author={post.author}
-                                createdAt={post.createdAt}
-                                getTimeSinceCreation={getTimeSinceCreation}
-                                getInitials={getInitials}
-                            />
-                            <PostMedia postUrl={post.post_url} />
-                            <PostContent title={post.title} content={post.content} />
-                            <ModalPostActions onPostClick={() => onPostClick(post._id)} />
+        <div className="justify-center h-screen flex">
+            <div className="items-center overflow-scroll no-scrollbar justify-center min-h-screen w-full">
+                <ul className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16 sm:mb-10">
+                    {posts.map((post) => (
+                        <li key={post._id}>
+                            <PostCard post={post} />
                         </li>
                     ))}
                 </ul>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import EditPost from '../post_component/EditPost';
 import PostMenu from './PostMenu';
-import { isImage, isVideo } from '../../utils/utils';
+import { isImage, isVideo } from '../../../utils/utils';
 
 const PostItem = ({ post, currentUserId, onEditComplete, onDelete }) => {
     const [isEditing, setIsEditing] = useState(false);

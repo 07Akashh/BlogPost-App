@@ -1,29 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Login from './components/authentication/Login';
-import Register from './components/authentication/Register';
-import Dashboard from './components/Dashboard';
-import BlogPage from './components/post/post_component/BlogPostModal';
-import UserProfile from './components/profile/UserProfile';
-import { AuthProvider } from './components/routes/AuthProvider';
-import PrivateRoute from './components/routes/PrivateRoute';
-import PublicRoute from './components/routes/PublicRoute';
-import BlogPostDetail from './components/post/post_component/BlogPostDetail';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import Layout from './components/home/Layout';
+import BlogPostDetail from './pages/blog/BlogPostDetail';
+import BlogPage from './pages/blog/BlogPostPage';
+import UserProfile from './pages/user/UserProfile';
+import PrivateRoute from './routes/PrivateRoute';
+import PublicRoute from './routes/PublicRoute';
+import UserList from './components/user/UserList';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProfile } from './redux/slices/authSlice';
 
 const App = () => {
+    const dispatch = useDispatch()
+    const { token, user } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (token && !user) {
+            dispatch(fetchProfile());
+        }
+    });
+
     return (
-        <AuthProvider>
-            <Router>
-                <Routes>
-                    <Route path="/register" element={<PublicRoute> <Register key={Date.now()}/> </PublicRoute>} />
-                    <Route path="/login" element={<PublicRoute> <Login key={Date.now()} /> </PublicRoute>} />
-                    <Route path="/" element={<PrivateRoute> <Dashboard /> </PrivateRoute>} />
-                    <Route path="/post/:id" element={<PrivateRoute> <BlogPostDetail/> </PrivateRoute>} />
-                    <Route path="/posts" element={<PrivateRoute> <BlogPage /> </PrivateRoute>} />
+        <Router>
+            <Routes>
+                <Route path="/register" element={<PublicRoute> <Register key={Date.now()} /> </PublicRoute>} />
+                <Route path="/login" element={<PublicRoute> <Login key={Date.now()} /> </PublicRoute>} />
+                <Route path="/" element={<Layout />}>
+                    <Route path="/post/:id" element={<PrivateRoute> <BlogPostDetail /> </PrivateRoute>} />
+                    <Route path="/" element={<BlogPage />} />
+                    <Route path="/user" element={<PrivateRoute> <UserList /> </PrivateRoute>} />
                     <Route path="/user/:userId" element={<PrivateRoute> <UserProfile /> </PrivateRoute>} />
-                </Routes>
-            </Router>
-        </AuthProvider>
+                </Route>
+            </Routes>
+        </Router>
     );
 };
 

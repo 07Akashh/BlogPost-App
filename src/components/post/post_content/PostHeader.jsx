@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getTimeSinceCreation } from "../../utils/utils";
+import { getTimeSinceCreation } from "../../../utils/utils";
 
 const PostHeader = ({ author, createdAt }) => (
     <div className="flex w-full items-center justify-between border-b pb-3">

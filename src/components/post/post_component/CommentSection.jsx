@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
 import { CommentSection } from 'react-comments-section';
-import { fetchProfileData } from '../../utils/userProfile';
-import { addComment, getComments } from '../../../services/BlogPostService';
 import 'react-comments-section/dist/index.css';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { addComment, getComments } from '../../../redux/services/BlogPostService';
+import { fetchProfileData } from '../../utils/userProfile';
 import { getInitials } from '../../utils/utils';
 
 const CommentSectionComponent = ({ postId }) => {
