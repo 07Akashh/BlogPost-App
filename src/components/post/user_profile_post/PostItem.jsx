@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import EditPost from '../post_component/EditPost';
 import PostMenu from './PostMenu';
 import { isImage, isVideo } from '../../../utils/utils';
+import { Link } from 'react-router-dom';
 
 const PostItem = ({ post, currentUserId, onEditComplete, onDelete }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -21,8 +22,10 @@ const PostItem = ({ post, currentUserId, onEditComplete, onDelete }) => {
 
     return (
         <div className="post-item border rounded-lg p-2 relative cursor-pointer">
-            {post.post_url && isImage(post.post_url) && <img src={post.post_url} alt="Post" className='w-full h-44 object-cover' />}
-            {post.post_url && isVideo(post.post_url) && <video src={post.post_url} controls className='w-full h-44 border object-cover' />}
+            <Link to={`/post/${post._id}`}>
+                {post.post_url && isImage(post.post_url) && <img src={post.post_url} alt="Post" className='w-full h-44 object-cover' />}
+                {post.post_url && isVideo(post.post_url) && <video src={post.post_url} controls className='w-full h-44 border object-cover' />}
+            </Link>
             <div className="flex justify-between items-center mt-2">
                 <h3 className="font-semibold">{post.title}</h3>
                 {post.author._id === currentUserId && (
@@ -36,7 +39,9 @@ const PostItem = ({ post, currentUserId, onEditComplete, onDelete }) => {
                     onEditComplete={handleEditComplete}
                 />
             ) : (
-                <p>{post.content}</p>
+                <Link to={`/post/${post._id}`}>
+                    <p>{post.content}</p>
+                </Link>
             )}
         </div>
     );
