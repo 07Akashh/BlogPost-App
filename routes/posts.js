@@ -3,24 +3,28 @@ const router = express.Router();
 const { BlogPost } = require('../models');
 const auth = require('../middleware/auth');
 const parser = require('../config/multer');
+const { generateSummary } = require('../middleware/openAi')
 const { uploadToCloudinary } = require('../middleware/upload');
 
-router.post('/add', auth, async (req, res) => {
+router.post('/', auth, async (req, res) => {
     try {
         const { title, content } = req.body;
         const author = req.user.id;
         let post_url = '';
-        
+
         if (req.files) {
             const post = req.files.media;
             post_url = await uploadToCloudinary(post);
         }
-        
+
+        const summary = await generateSummary(content);
+
         const post = new BlogPost({
             title,
             content,
             author,
             post_url,
+            summary
         });
         await post.save();
         res.status(201).send(post);
@@ -53,7 +57,7 @@ router.get('/:id', auth, async (req, res) => {
     }
 });
 
-router.patch('/:id', auth, async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const { title, content } = req.body;
 
     if (title && (typeof title !== 'string' || title.trim() === '')) {
