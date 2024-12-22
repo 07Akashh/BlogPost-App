@@ -27,7 +27,9 @@ const PostItem = ({ post, currentUserId, onEditComplete, onDelete }) => {
                 {post.post_url && isVideo(post.post_url) && <video src={post.post_url} controls className='w-full h-44 border object-cover' />}
             </Link>
             <div className="flex justify-between items-center mt-2">
-                <h3 className="font-semibold">{post.title}</h3>
+                <Link to={`/post/${post._id}`}>
+                    <h3 className="font-semibold">{post.title}</h3>
+                </Link>
                 {post.author._id === currentUserId && (
                     <PostMenu onEditClick={handleEditClick} onDeleteClick={() => onDelete(post._id)} />
                 )}
